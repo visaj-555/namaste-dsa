@@ -36,3 +36,12 @@ function fib(n, memo = {}) {
   memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
   return memo[n];
 }
+
+// Optimal without memoization
+
+var fib = function (n) {
+  if (n <= 1) return n;
+  return fib(n - 1) + fib(n - 2);
+};
+
+console.log(fib(5));
