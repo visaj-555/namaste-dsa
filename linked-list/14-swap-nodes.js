@@ -20,14 +20,17 @@ var swapPairs = function(head) {
     return dummy.next;
 };
 
+// Revision : Recursion 
+
 
 var swapPairs = function(head) {
     if (!head || !head.next) return head;
 
-    let l = head;
-    let r = head.next;
+    let first = head;
+    let second = head.next;
 
-    l.next = swapPairs(r.next);
-    r.next = l;
-    return r;
+    first.next = swapPairs(second.next);
+    second.next = first;
+
+    return second;
 };

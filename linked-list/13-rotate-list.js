@@ -1,8 +1,11 @@
 // 61. Rotate List
 
+// Easy Variable names 
+
 var rotateRight = function(head, k) {
     if (!head || !head.next || k === 0) return head;
-    
+
+    // Step 1: find length
     let length = 1;
     let tail = head;
     while (tail.next) {
@@ -10,19 +13,21 @@ var rotateRight = function(head, k) {
         length++;
     }
 
-    k = k % length;
-    if (k === 0) return head;
+    // Step 2: make it circular
+    tail.next = head;
 
-    let stepsToNewHead = length - k;
-    let prev = null;
-    let curr = head;
-    while (stepsToNewHead--) {
-        prev = curr;
-        curr = curr.next;
+    // Step 3: find new tail
+    k = k % length;
+    let steps = length - k;
+
+    let newTail = head;
+    for (let i = 1; i < steps; i++) {
+        newTail = newTail.next;
     }
 
-    prev.next = null;
-    tail.next = head;
-    return curr;
+    // Step 4: break the circle
+    let newHead = newTail.next;
+    newTail.next = null;
+
+    return newHead;
 };
-    
