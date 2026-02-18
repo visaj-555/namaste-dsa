@@ -1,26 +1,27 @@
 // 150. Evaluate Reverse Polish Notation
 
-var evalRPN = function(arr) {
-    let stack = [];
-    const map = {
-        "+": (a,b) => (b+a),
-        "*": (a,b) => (b*a),
-        "-": (a,b) => (b-a),
-        "/": (a,b) => Math.trunc(b/a),
-    };
-        for(let i=0; i < arr.length; i++){
-            if(map[arr[i]]) {
-                let a = stack.pop();
-                let b = stack.pop();
-                let ans = map[arr[i]](+a,+b);
-                stack.push(ans);
-            } else {
-                stack.push(arr[i]) 
-            }
-        }
-    return Number(stack.pop());
+
+// Akshay's Solution 
+
+var evalRPN = function (tokens) {
+  const stack = [];
+
+  for (let token of tokens) {
+    if (!isNaN(token)) {
+      stack.push(Number(token));
+    } else {
+      const b = stack.pop();
+      const a = stack.pop();
+
+      if (token === "+") stack.push(a + b);
+      if (token === "-") stack.push(a - b);
+      if (token === "*") stack.push(a * b);
+      if (token === "/") stack.push(Math.trunc(a / b));
+    }
+  }
+
+  return stack.pop();
 };
 
-
- console.log(evalRPN(["2","1","+","3","*"])) 
- console.log(evalRPN(["4","13","5","/","+"]))
+console.log(evalRPN(["2", "1", "+", "3", "*"]));
+console.log(evalRPN(["4", "13", "5", "/", "+"]));
