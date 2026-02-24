@@ -43,6 +43,77 @@ var orangesRotting = function(grid) {
     return maxMinutes;
 };
 
+
+// Easy Solution : 
+
+function orangesRotting(grid) {
+
+  const rows = grid.length;
+  const cols = grid[0].length;
+
+  let queue = [];          // rotten oranges waiting to spread
+  let freshCount = 0;      // total fresh oranges
+  let minutes = 0;
+
+  // -------- STEP 1: Find initial oranges --------
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+
+      if (grid[r][c] === 2) {
+        queue.push([r, c]);   // already rotten
+      }
+
+      if (grid[r][c] === 1) {
+        freshCount++;
+      }
+    }
+  }
+
+  // directions: down, up, right, left
+  const directions = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1]
+  ];
+
+  // -------- STEP 2: Spread rot (BFS) --------
+  while (queue.length > 0 && freshCount > 0) {
+
+    let orangesThisMinute = queue.length;
+
+    for (let i = 0; i < orangesThisMinute; i++) {
+
+      let [row, col] = queue.shift();
+
+      for (let [dr, dc] of directions) {
+
+        let newRow = row + dr;
+        let newCol = col + dc;
+
+        // check valid cell + fresh orange
+        if (
+          newRow >= 0 &&
+          newRow < rows &&
+          newCol >= 0 &&
+          newCol < cols &&
+          grid[newRow][newCol] === 1
+        ) {
+
+          grid[newRow][newCol] = 2; // make rotten
+          freshCount--;
+          queue.push([newRow, newCol]);
+        }
+      }
+    }
+
+    minutes++;
+  }
+
+  // -------- STEP 3: Final answer --------
+  return freshCount === 0 ? minutes : -1;
+}
+
 console.log(orangesRotting([[2,1,1],[1,1,0],[0,1,1]]));
 console.log(orangesRotting([[2,1,1],[0,1,1],[1,0,1]]));
 console.log(orangesRotting([[0,2]]));
