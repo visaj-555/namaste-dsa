@@ -43,6 +43,8 @@ var merge = function (nums1, m, nums2, n) {
   }
 };
 
+
+
 console.log(((a) => (merge(a, 3, [2, 5, 6], 3), a))([1, 2, 3, 0, 0, 0]));
 console.log(((a) => (merge(a, 1, [], 0), a))([1]));
 console.log(((a) => (merge(a, 0, [1], 1), a))([0]));
