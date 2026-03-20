@@ -15,6 +15,8 @@ function selectionSort(arr) {
     arr[minIndex] = temp;
   }
 
+  //  Another way to swap :     [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+
   return arr;
 }
 
