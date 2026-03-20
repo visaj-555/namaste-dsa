@@ -13,6 +13,8 @@ function bubbleSort(arr) {
       }
     }
 
+    // Another Way to Swap :         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+
     if (!isSwapped) {
       break;
     }
