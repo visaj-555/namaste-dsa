@@ -1,34 +1,23 @@
-function mergeSort(arr) {
-  if (arr.length <= 1) return arr;
-  let mid = Math.floor(arr.length / 2);
-  let left = arr.slice(0, mid);
-  let right = arr.slice(mid);
-  let sortedLeft = mergeSort(left);
-  let sortedRight = mergeSort(right);
-  return merge(sortedLeft, sortedRight);
-}
+var sortArray = function (nums) {
+  if (nums.length <= 1) return nums;
+  let mid = Math.floor(nums.length / 2);
+  let left = sortArray(nums.slice(0, mid));
+  let right = sortArray(nums.slice(mid));
+  return merge(left, right);
+};
+
 function merge(left, right) {
-  let result = [];
-  let i = 0;
-  let j = 0;
+  let res = [],
+    i = 0,
+    j = 0;
   while (i < left.length && j < right.length) {
     if (left[i] < right[j]) {
-      result.push(left[i]);
-      i++;
+      res.push(left[i++]);
     } else {
-      result.push(right[j]);
-      j++;
+      res.push(right[j++]);
     }
   }
-  while (i < left.length) {
-    result.push(left[i]);
-    i++;
-  }
-  while (j < right.length) {
-    result.push(right[j]);
-    j++;
-  }
-  return result;
+  return [...res, ...left.slice(i), ...right.slice(j)];
 }
 
 console.log(mergeSort([4, 5, 1, 3, 9]));
