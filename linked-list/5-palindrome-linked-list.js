@@ -20,6 +20,7 @@ var isPalindrome = function (head) {
 // Optimal :
 
 var isPalindrome = function (head) {
+  // Traverse to find the middle of the linked list
   let slow = head,
     fast = head;
 
